@@ -1,0 +1,55 @@
+<%= form_for @product, :html => {:multipart => true} do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= image_tag(@product.photo_url) if @product.photo? %>
+    <%= f.file_field :photo %>
+    <%= f.hidden_field :photo_cache %>
+  </div>
+  <div class="field">
+    <%= f.label :brand_id %><br />
+    <%= collection_select(:product, :brand_id, Brand.all, :id, :name, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br />
+    <%= f.number_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :type_id %><br />
+    <%= collection_select(:product, :type_id, Type.all, :id, :tag, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :year_purchased %><br />
+    <%= f.select :year_purchased, options_for_select((2000..2012)), :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :age_level %><br />
+    <%= f.select :age_level, options_for_select(['0-6 Months', '6-9 Months', '9-12 Months', '12-18 Months', '18-24 Months', '24-30 Months', '30-36 Months', '36+ Months']), :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :sex %><br />
+    <%= f.select :sex, options_for_select(['Male', 'Female']), :prompt => true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

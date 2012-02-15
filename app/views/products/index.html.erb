@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="span12">
+        <h2>Products</h2>
+        <ul class="thumbnails">
+            <% @products.each do |product| %>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <%= image_tag product.photo_url(:thumb) if product.photo? %>
+                        <div class="caption">
+                            <h4><%= product.name %></h4>
+                            <p>Manufacturer:  <%= product.brand.name %></p>
+                            <p>Model:  <%= product.model %></p>
+                            <p>Ages:  <%= product.age_level %></p>
+                            <p> <%= link_to "Details", product, :class => "btn primary" %>
+                                <%= link_to "Edit", edit_product_path(product), :class => "btn primary" %>
+                                <%= link_to "Remove", product, confirm: 'Are you sure?', method: :delete, :class => "btn primary" %></p>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <%= link_to 'New Product', new_product_path %>
+    </div>
+</div>
+
