@@ -26,7 +26,10 @@
                                         <% end %>
                                     </li>
                                     <li>
-                                        <%= link_to "Remove", product, confirm: 'Are you sure?', method: :delete %>
+                                        <%= link_to(product, html_options = {confirm: 'Are you sure?', method: :delete}) do %>
+                                            <i class="icon-trash"></i>
+                                            Remove
+                                        <% end %>
                                     </li>
                                 </ul>
                             </div>
