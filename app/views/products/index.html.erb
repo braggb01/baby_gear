@@ -7,13 +7,29 @@
                     <div class="thumbnail">
                         <%= image_tag product.photo_url(:thumb) if product.photo? %>
                         <div class="caption">
-                            <h4><%= product.name %></h4>
-                            <p>Manufacturer:  <%= product.brand.name %></p>
-                            <p>Model:  <%= product.model %></p>
-                            <p>Ages:  <%= product.age_level %></p>
-                            <p> <%= link_to "Details", product, :class => "btn primary" %>
-                                <%= link_to "Edit", edit_product_path(product), :class => "btn primary" %>
-                                <%= link_to "Remove", product, confirm: 'Are you sure?', method: :delete, :class => "btn primary" %></p>
+                            <h3><%= product.name.upcase %></h3>
+                            <p>
+                                <strong>Manufacturer:  </strong><%= product.brand.name.titleize %><br>
+                                <strong>Model:  </strong><%= product.model.titleize %><br>
+                                <strong>Ages:  </strong><%= product.age_level %>
+                            </p>
+                            <div class="btn-group offset1">
+                                <%= link_to "Details", product, :class => "btn" %>
+                                <%= link_to('', html_options = {:class => "btn dropdown-toggle", "data-toggle" => "dropdown"}) do %>
+                                    <span class="caret"></span>
+                                <% end %>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <%= link_to(edit_product_path(product)) do %>
+                                            <i class="icon-pencil"></i>
+                                            Edit
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= link_to "Remove", product, confirm: 'Are you sure?', method: :delete %>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </li>
